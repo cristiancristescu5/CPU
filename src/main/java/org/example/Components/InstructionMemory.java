@@ -4,12 +4,13 @@ import org.example.Exceptions.InvalidNumberOfInstructions;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InstructionMemory {
     private final int SIZE;
-    private String filePath;
-    private String[] instructions;
+    private final String filePath;
+    private final String[] instructions;
     private int numInstr=0;
     public InstructionMemory(int size, String filePath) throws InvalidNumberOfInstructions {
         this.SIZE = size;
@@ -51,5 +52,8 @@ public class InstructionMemory {
         }else{
             throw new IllegalArgumentException("Index too big");
         }
+    }
+    public void reset(){
+        Arrays.fill(instructions, 0 , SIZE-1, null);
     }
 }

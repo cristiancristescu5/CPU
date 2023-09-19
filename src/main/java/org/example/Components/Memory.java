@@ -1,12 +1,14 @@
 package org.example.Components;
 
+import java.util.Arrays;
+
 public class Memory {
     private final short SIZE;
-    private long[] memory;
+    private short[] memory;
 
     public Memory(short size) {
         SIZE = size;
-        memory = new long[SIZE];
+        memory = new short[SIZE];
         for (int i = 0; i < SIZE; i++) {
             memory[i] = 0;
         }
@@ -16,10 +18,14 @@ public class Memory {
         return SIZE;
     }
 
-    public long getFromAddress(short index){
-        if(index < SIZE){
-            return memory[index];
-        }
-        throw new IllegalArgumentException("Index too big");
+    public short loadFromAddress(short index){
+        return memory[index];
+    }
+    public void storeToAddress(short index, short information){
+        memory[index] = information;
+    }
+
+    public void reset(){
+        Arrays.fill(memory, 0, SIZE-1, (short) 0);
     }
 }

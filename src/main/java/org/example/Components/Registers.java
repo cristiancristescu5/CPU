@@ -19,4 +19,13 @@ public class Registers {
         stackSize = 0;
         stackPointer = 0;
     }
+    public short loadFromRegister(int index){
+        if(index < 8){
+            return registers[index];
+        }
+        throw new IllegalArgumentException("Register: " + index + "does not exist!");
+    }
+    public void storeToRegister(int index){
+
+    }
 }
