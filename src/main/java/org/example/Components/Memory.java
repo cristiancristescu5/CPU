@@ -1,10 +1,10 @@
 package org.example.Components;
 
 public class Memory {
-    private final int SIZE;
+    private final short SIZE;
     private long[] memory;
 
-    public Memory(int size) {
+    public Memory(short size) {
         SIZE = size;
         memory = new long[SIZE];
         for (int i = 0; i < SIZE; i++) {
@@ -12,11 +12,11 @@ public class Memory {
         }
     }
 
-    public int getSIZE() {
+    public short getSIZE() {
         return SIZE;
     }
 
-    public long getFromAddress(int index){
+    public long getFromAddress(short index){
         if(index < SIZE){
             return memory[index];
         }
