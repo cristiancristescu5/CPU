@@ -1,7 +1,5 @@
 package org.example.Instructions;
 
-import org.example.Components.InstructionMemory;
-
 public class Instruction {
     private final String op;
     private final String src1;

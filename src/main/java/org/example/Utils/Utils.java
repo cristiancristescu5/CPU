@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Utils;
 
 public class Utils {
     public static String getBinaryRepresentation(int x, int size) {
