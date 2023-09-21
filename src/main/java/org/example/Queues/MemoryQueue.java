@@ -11,7 +11,7 @@ public class MemoryQueue {//singleton, for writing into memory
 
     public static void addInMemory(MemoryData mem){
         try{
-            memoryData.offer(mem, 10, TimeUnit.SECONDS);
+            memoryData.offer(mem, 10, TimeUnit.SECONDS);//adaug if
         }catch (InterruptedException e){
             throw new IllegalStateException("Waited too many seconds for memory.");
         }
