@@ -2,6 +2,7 @@ package org.example.Components;
 
 import org.example.Utils.Utils;
 
+// TODO: 9/24/2023 create another alu 
 public class Alu {
     private short zero;
     private short equal;

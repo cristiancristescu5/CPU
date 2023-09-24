@@ -40,14 +40,14 @@ public class Memory {
 
     public static long loadInstruction(short addr, short numOfWords) {//max 3 words
         long instruction = 0;
-        if (numOfWords > 3) {
+        if (numOfWords > 4) {
             throw new IllegalArgumentException("Invalid number of instructions");
         }
         if (addr % 2 != 0 || addr < Integer.valueOf("fff0", 16).shortValue()) {
             throw new IllegalArgumentException("Invalid instruction address");
         }
         for (int i = 0; i < numOfWords; i++) {
-            instruction += ((long) memory.get(addr + 2 * i) & 0xFFFF) << (i * 16);
+            instruction += ((long) memory.get((short)(addr + 2 * i)) & 0xFFFF) << (i * 16);
         }
         return instruction;
     }

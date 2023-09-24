@@ -3,44 +3,51 @@ package org.example.Components;
 import org.example.Memory.Memory;
 
 public class LoadStoreUnit {
-    private final Registers registers = new Registers((short) 128);
+    private static final Registers registers = new Registers((short) 128);
 
-    public void reset() {
+    public static void reset() {
         registers.reset();
         Memory.reset();
     }
 
-    public short loadFromRegister(int index) throws IllegalArgumentException {
+    public static short loadFromRegister(int index) throws IllegalArgumentException {
         return registers.loadFromRegister(index);
     }
 
-    public void storeToRegister(int index, short data) {
+    public static void storeToRegister(int index, short data) {
         registers.storeToRegister(index, data);
     }
 
-    public short getInstructionPointer() {
+    public static short getInstructionPointer() {
         return registers.getInstructionPointer();
     }
 
-    public short[] getFlags() {
+    public static short[] getFlags() {
         return registers.getFlags();
     }
 
-    public short getStackPointer() {
+    public static short getStackPointer() {
         return registers.getStackPointer();
     }
 
-    public void loadFromMemoryIntoRegister(int index, short addr) {
+    public static void loadFromMemoryIntoRegister(int index, short addr) {
         String data = String.valueOf(Memory.loadFromAddress(addr, (short) 1)).substring(12, 15);
         short numData = Integer.valueOf(data).shortValue();
         registers.storeToRegister(index, numData);
     }
 
-    public void storeToMemoryFromRegister(int index, short addr) {
+    public static void storeToMemoryFromRegister(int index, short addr) {
         Memory.storeToAddress(addr, registers.loadFromRegister(index));
     }
 
-    public void setStackPointer(short addr) {
+    public static void setStackPointer(short addr) {
         registers.setStackPointer(addr);
+    }
+    public static short getInstruction(){
+        return (short) Memory.loadInstruction(registers.getInstructionPointer(), (short) 4);
+    }
+    public static void incrementProgramCounter(){
+        // TODO: 9/21/2023 registri:incrementare ip, setare ip dupamjump
+        // TODO: 9/21/2023 refacere partea de decodificare 
     }
 }

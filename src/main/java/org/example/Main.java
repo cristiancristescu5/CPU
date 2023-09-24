@@ -12,6 +12,8 @@ public class Main {
         Memory.storeToAddress((short) -22, (short) 0xFF11);
         System.out.printf("0x%016x%n", Memory.loadFromAddress((short) -18, (short) 1));
         System.out.println(Long.toHexString(-16).length());
+        System.out.println((short) 0x000000000000fff0);
+        System.out.println(Long.parseLong("fff0", 16));
         //        FetchStage fetchStage = new FetchStage();
 //        DecodeStage decodeStage = new DecodeStage();
 //        ExecutionStage executionStage = new ExecutionStage();

@@ -6,19 +6,22 @@ public class Instruction {
     private final String src2;
     private String optionalParam1;
     private String optionalParam2;
+    private boolean isComplete;
 
-    public Instruction(String op, String src1, String src2) {
+    public Instruction(String op, String src1, String src2, boolean isComplete) {
         this.op = op;
         this.src1 = src1;
         this.src2 = src2;
+        this.isComplete = isComplete;
     }
 
-    public Instruction(String op, String src1, String src2, String optionalParam1, String optionalParam2) {
+    public Instruction(String op, String src1, String src2, String optionalParam1, String optionalParam2, boolean isComplete) {
         this.op = op;
         this.src1 = src1;
         this.src2 = src2;
         this.optionalParam1 = optionalParam1;
         this.optionalParam2 = optionalParam2;
+        this.isComplete = isComplete;
     }
 
     public String getOp() {
@@ -39,5 +42,21 @@ public class Instruction {
 
     public String getOptionalParam2() {
         return optionalParam2;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void setOptionalParam1(String optionalParam1) {
+        this.optionalParam1 = optionalParam1;
+    }
+
+    public void setOptionalParam2(String optionalParam2) {
+        this.optionalParam2 = optionalParam2;
+    }
+
+    public void setComplete(boolean complete) {
+        isComplete = complete;
     }
 }
