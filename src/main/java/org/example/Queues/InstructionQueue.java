@@ -21,4 +21,9 @@ public class InstructionQueue {//singleton
             throw new IllegalStateException("Waited too many seconds in order to extract from the Instruction Queue.");
         }
     }
+    public static void emptyQueue(){
+        while(!instructions.isEmpty()){
+            instructions.poll();
+        }
+    }
 }

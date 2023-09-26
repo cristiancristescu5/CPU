@@ -3,15 +3,13 @@ package org.example.Components;
 import org.example.Instructions.Instruction;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Decoder {
-    private final List<String> OPParams = new ArrayList<>();
-
-    public Decoder() {
-        OPParams.add("10000");
-        OPParams.add("10001");
-        OPParams.add("10010");
+    private final List<String> OPParams = Arrays.asList("10000", "10001", "10010");
+    public List<String> getOPParams() {
+        return OPParams;
     }
 
     public Instruction decode(String instruction) {//16 bits

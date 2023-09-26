@@ -1,5 +1,7 @@
 package org.example.Memory;
 
+import org.example.Utils.Utils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -38,41 +40,38 @@ public class Memory {
         }
     }
 
-    public static long loadInstruction(short addr, short numOfWords) {//max 3 words
-        long instruction = 0;
+    public static String loadInstruction(short addr, short numOfWords) {//max 4 words
+        StringBuilder strInstruction = new StringBuilder();
         if (numOfWords > 4) {
             throw new IllegalArgumentException("Invalid number of instructions");
         }
         if (addr % 2 != 0 || addr < Integer.valueOf("fff0", 16).shortValue()) {
             throw new IllegalArgumentException("Invalid instruction address");
         }
-        for (int i = 0; i < numOfWords; i++) {
-            instruction += ((long) memory.get((short)(addr + 2 * i)) & 0xFFFF) << (i * 16);
+        for(int i = 0 ; i < numOfWords ; i++){
+            strInstruction.append(Utils.getBinaryRepresentation(memory.get((short)(addr + 2 * i)), 16));
         }
-        return instruction;
+        return strInstruction.toString();
+    }
+    public static void store(Map<Short, Short> data) {
+        for (Short s : data.keySet()) {
+            if (s % 2 != 0) {
+                throw new IllegalArgumentException("Address must be even!");
+            }
+            if (data.get(s) != null) {
+                memory.put(s, data.get(s));
+            }
+        }
     }
 
-    public static long loadFromAddress(short addr, short numOfWords) {
-        long data = 0;
-        if (numOfWords > 4) {
-            throw new IllegalArgumentException("Invalid number of instructions");
+    public static Map<Short, Short> load(short address) {
+        if (address % 2 != 0) {
+            throw new IllegalArgumentException("Address must be even.");
         }
-        if (addr % 2 != 0 || addr >= Integer.valueOf("fff0", 16).shortValue()) {
-            throw new IllegalArgumentException("Invalid memory address");
+        Map<Short, Short> data = new HashMap<>();
+        for (short i = 0, addr = address; i < 4; i++, addr -= 2) {
+            data.put(addr, memory.get(addr));
         }
-        for (int i = 0; i < numOfWords; i++) {
-            System.out.println("addr: " + Short.toString((short) (addr - 2 * i)));
-            data += ((long) memory.get((short) (addr - 2 * i)) & 0xFFFF) << (i * 16);
-        }
-
         return data;
-    }
-
-    public static void storeToAddress(short addr, short data) {
-        if (addr % 2 != 0 || addr >= Integer.valueOf("fff0", 16).shortValue()) {
-            throw new IllegalArgumentException("Invalid data memory address.");
-        }
-        System.out.println("addr: " + addr + " data: " + data);
-        memory.put(addr, data);
     }
 }

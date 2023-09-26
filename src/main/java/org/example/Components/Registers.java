@@ -63,4 +63,11 @@ public class Registers { //singleton, only one instance
         }
         this.stackPointer = stackPointer;
     }
+
+    public void setInstructionPointer(short instructionPointer) {
+        this.instructionPointer = instructionPointer;
+    }
+    public void setZFlag(short z){
+        flags[0] = z;
+    }
 }

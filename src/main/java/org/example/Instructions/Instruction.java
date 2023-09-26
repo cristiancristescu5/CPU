@@ -1,5 +1,9 @@
 package org.example.Instructions;
 
+import org.example.Memory.Memory;
+
+import java.util.Map;
+// e gata
 public class Instruction {
     private final String op;
     private final String src1;
@@ -7,13 +11,8 @@ public class Instruction {
     private String optionalParam1;
     private String optionalParam2;
     private boolean isComplete;
-
-    public Instruction(String op, String src1, String src2, boolean isComplete) {
-        this.op = op;
-        this.src1 = src1;
-        this.src2 = src2;
-        this.isComplete = isComplete;
-    }
+    private Map<Short, Short> fromMemory1 = null;
+    private Map<Short, Short> fromMemory2 = null;
 
     public Instruction(String op, String src1, String src2, String optionalParam1, String optionalParam2, boolean isComplete) {
         this.op = op;
@@ -58,5 +57,21 @@ public class Instruction {
 
     public void setComplete(boolean complete) {
         isComplete = complete;
+    }
+
+    public Map<Short, Short> getFromMemory1() {
+        return fromMemory1;
+    }
+
+    public Map<Short, Short> getFromMemory2() {
+        return fromMemory2;
+    }
+
+    public void setFromMemory1(Map<Short, Short> fromMemory1) {
+        this.fromMemory1 = fromMemory1;
+    }
+
+    public void setFromMemory2(Map<Short, Short> fromMemory2) {
+        this.fromMemory2 = fromMemory2;
     }
 }

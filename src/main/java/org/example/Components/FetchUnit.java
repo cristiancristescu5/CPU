@@ -7,15 +7,20 @@ public class FetchUnit {
     private short ip;
 
     public FetchUnit() {
-        ip = Integer.valueOf("fff0").shortValue(); // -16
+        ip = Integer.valueOf("fff0").shortValue();
     }
 
+    public void setIp(short ip) {
+        this.ip = ip;
+    }
     public void incrementIP() {
         ip = (short) (ip + 8);
     }
 
     public void fetch() {
-        InstructionQueue.addInstruction(Utils.getBinaryRepresentation(LoadStoreUnit.getInstruction(), 64));
+        String instruction = LSUnit.getInstruction(ip);
+        InstructionQueue.addInstruction(instruction);
+        System.out.println(ip + ": " + instruction);
         incrementIP();
     }
 }
