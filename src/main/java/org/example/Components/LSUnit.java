@@ -12,36 +12,34 @@ public class LSUnit {
         Memory.reset();
     }
 
-    public static short loadFromRegister(short index){
+    public static short loadFromRegister(int index){//executor
         return registers.loadFromRegister(index);
     }
-    public static void storeToRegister(short index, short data){
+    public static void storeToRegister(int index, short data){//executor
         registers.storeToRegister(index, data);
     }
-    public static short getInstructionPointer(){
+    public static short getInstructionPointer(){//executor
         return registers.getInstructionPointer();
     }
-    public static void setInstructionPointer(short ip){
+    public static void setInstructionPointer(short ip){//executor
         registers.setInstructionPointer(ip);
     }
-    public static Map<Short, Short> loadFromMemory(short addr){
+    public static Map<Short, Short> loadFromMemory(short addr){//ramane
         return Memory.load(addr);
     }
-    public static void storeToMemory(Map<Short, Short> data){
+    public static void storeToMemory(Map<Short, Short> data){//ramane
         Memory.store(data);
     }
-    public static void loadFromMemoryIntoRegister(short index, short addr){
-        registers.storeToRegister(index, Memory.load(addr).get(addr));
+    public static void setFlags(short[] flags){//executor
+        registers.setFlags(flags);
     }
-    public static void loadFromRegisterIntoMemory(short index, short addr){
-        Map<Short, Short> data = new HashMap<>();
-        data.put(addr, registers.loadFromRegister(index));
-        data.put((short) (addr-2), null);
-        data.put((short) (addr-4), null);
-        data.put((short) (addr-6), null);
-        Memory.store(data);
+    public static void setZeroFlag(short[] flags){
+        registers.setZFlag(flags);
     }
-    public static String getInstruction(short addr){
+    public static short[] getFlags(){
+        return registers.getFlags();
+    }
+    public static String getInstruction(short addr){//ramane
         return Memory.loadInstruction(addr, (short) 4);
     }
 

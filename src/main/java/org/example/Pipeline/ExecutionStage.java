@@ -24,7 +24,6 @@ public class ExecutionStage implements Runnable {
         while (StageSignals.isExecuteRunning()) {
             if (!StoreQueue.isEmpty()) {
                 try {
-
                     executor.execute(ExecutionQueue.popInstruction());
                 } catch (InvalidInstructionFormatException e) {
                     stop();

@@ -31,13 +31,13 @@ public class LoadStage implements Runnable {
                         i.setFromMemory1(LSUnit.loadFromMemory(Integer.valueOf(i.getOptionalParam1(), 2).shortValue()));
                     }
                     if (i.getSrc1().equals("10010")) {
-                        i.setFromMemory1(LSUnit.loadFromMemory(LSUnit.loadFromRegister(Integer.valueOf(i.getOptionalParam1(), 2).shortValue())));//scot din memorie de la dresa continuta de registrul din op1
+                        i.setFromMemory1(LSUnit.loadFromMemory(LSUnit.loadFromRegister(Integer.parseInt(i.getOptionalParam1(), 2) - 1)));//scot din memorie de la dresa continuta de registrul din op1
                     }
                     if (i.getSrc2().equals("10001")) {
                         i.setFromMemory2(LSUnit.loadFromMemory(Integer.valueOf(i.getOptionalParam2(), 2).shortValue()));
                     }
                     if (i.getSrc2().equals("10010")) {
-                        i.setFromMemory2(LSUnit.loadFromMemory(LSUnit.loadFromRegister(Integer.valueOf(i.getOptionalParam2(), 2).shortValue())));//scot din memorie de la dresa continuta de registrul din op1
+                        i.setFromMemory2(LSUnit.loadFromMemory(LSUnit.loadFromRegister(Integer.parseInt(i.getOptionalParam2(), 2) - 1)));//scot din memorie de la dresa continuta de registrul din op2
                     }
                 }
                 ExecutionQueue.addInstruction(i);

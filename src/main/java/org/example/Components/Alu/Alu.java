@@ -57,6 +57,9 @@ public class Alu {
                     return new AluResult(null, new short[]{0, 0, 1}, null, null);
                 }
             }
+            default -> {
+                throw new IllegalArgumentException("Invalid operation " + op);
+            }
         }
         return null;
     }

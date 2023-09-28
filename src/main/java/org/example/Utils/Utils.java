@@ -1,5 +1,6 @@
 package org.example.Utils;
 
+// TODO: 9/28/2023 sa adaug aprte de complement fata de 2 
 public class Utils {
     public static String getBinaryRepresentation(int x, int size) {
         char[] number = new char[size];

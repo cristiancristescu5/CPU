@@ -4,7 +4,7 @@ import org.example.Components.LSUnit;
 import org.example.Instructions.Instruction;
 import org.example.Queues.StoreQueue;
 import org.example.Utils.StageSignals;
-//e gata
+
 public class StoreStage implements Runnable {
 
     private void stop(){
@@ -19,10 +19,10 @@ public class StoreStage implements Runnable {
         while(StageSignals.isLoadRunning()){
             if(!StoreQueue.isEmpty()){
                 Instruction i = StoreQueue.popInstruction();
-                if(i.getFromMemory1()!=null){//duc inapoi ceea ce am luat din memorie cu datele necesare modificate
+                if(i.getFromMemory1()!=null){
                     LSUnit.storeToMemory(i.getFromMemory1());
                 }
-                if(i.getFromMemory2()!=null){//same thing
+                if(i.getFromMemory2()!=null){
                     LSUnit.storeToMemory(i.getFromMemory2());
                 }
             }

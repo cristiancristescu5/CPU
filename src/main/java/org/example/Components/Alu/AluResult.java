@@ -13,4 +13,19 @@ public class AluResult {
         this.r0 = r0;
     }
 
+    public short[] getFlags() {
+        return flags;
+    }
+
+    public Short getR0() {
+        return r0;
+    }
+
+    public Short getR1() {
+        return r1;
+    }
+
+    public Short getResult() {
+        return result;
+    }
 }

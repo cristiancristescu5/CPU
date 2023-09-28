@@ -7,11 +7,11 @@ import java.util.Arrays;
 
 public class Registers { //singleton, only one instance
     private short[] registers = new short[8];
-    private short instructionPointer;
+    private short instructionPointer = Integer.valueOf("fff0").shortValue();
     private short[] flags = new short[3];
-    private short stackBase;
-    private short stackSize;
-    private short stackPointer;
+    private short stackBase = 0;
+    private short stackSize = 128;
+    private short stackPointer = 0;
 
     public Registers(short stackSize){
         Arrays.fill(registers, (short) 0);
@@ -67,7 +67,11 @@ public class Registers { //singleton, only one instance
     public void setInstructionPointer(short instructionPointer) {
         this.instructionPointer = instructionPointer;
     }
-    public void setZFlag(short z){
-        flags[0] = z;
+    public void setZFlag(short []flags){
+        this.flags[0] = flags[0];
+    }
+
+    public void setFlags(short[] flags) {
+        this.flags = flags;
     }
 }

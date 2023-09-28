@@ -1,6 +1,7 @@
 package org.example.Pipeline;
 
 import org.example.Components.Decoder;
+import org.example.Exceptions.InvalidInstructionFormatException;
 import org.example.Instructions.Instruction;
 import org.example.Queues.InstructionQueue;
 import org.example.Queues.LoadQueue;
@@ -12,8 +13,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-// TODO: 9/26/2023 pt operatii de load, am un buffer ce retine instructiunile mai intai, apoi fac load ul, apoi bag in coada de executie de mai trebuie, apoi in coada de store
-// TODO: 9/25/2023 sa verific ce si cum fac ca sa redirectionez instructiuni catre memoryQueue mai intai si apoi catre execution queue, sa vad cum pastreaz ordinea
 public class DecodeStage implements Runnable {
     private final Decoder decoder = new Decoder();
     private Queue<Instruction> incompleteInstructions;
@@ -44,7 +43,13 @@ public class DecodeStage implements Runnable {
                 };
                 for (int i = 0; i < 4; i++) {
                     if (incompleteInstructions.isEmpty()) {//daca nu exista instructiuni incomplete
-                        Instruction decodedInstruction = decoder.decode(instructionList[i]);//decodez
+
+                        Instruction decodedInstruction = null;//decodez
+                        try {
+                            decodedInstruction = decoder.decode(instructionList[i]);
+                        } catch (InvalidInstructionFormatException e) {
+                            throw new RuntimeException(e);
+                        }
                         while (!decodedInstruction.isComplete() && i < 3) {//completez instructiunea daca e nevoie
                             decoder.completeInstruction(decodedInstruction, instructionList[i + 1]);//completez instructiuni
                             i++;
@@ -52,11 +57,8 @@ public class DecodeStage implements Runnable {
                         if (!decodedInstruction.isComplete()) {
                             incompleteInstructions.add(decodedInstruction);//adaug instructiunile incomplete
                         } else {
-//                            if (optionalParams.contains(decodedInstruction.getSrc1()) || optionalParams.contains(decodedInstruction.getSrc2())) {
                                 LoadQueue.push(decodedInstruction);
-//                            } else {
-//                                ExecutionQueue.addInstruction(decodedInstruction);
-//                            }
+
                         }
                     } else {
                         Instruction incompleteInstruction = incompleteInstructions.poll();//daca exista instructiuni incomplete le completez cu ce mai am din acest fetch window
@@ -66,11 +68,7 @@ public class DecodeStage implements Runnable {
                             decoder.completeInstruction(incompleteInstruction, instructionList[i]); // al doilea pas daca e necesar
                         }
                         if (incompleteInstruction.isComplete()) {
-//                            if (optionalParams.contains(incompleteInstruction.getSrc1()) || optionalParams.contains(incompleteInstruction.getSrc2())) {
                                 LoadQueue.push(incompleteInstruction);
-//                            } else {
-//                                ExecutionQueue.addInstruction(incompleteInstruction);
-//                            }
                         } else {
                             incompleteInstructions.add(incompleteInstruction);
                         }

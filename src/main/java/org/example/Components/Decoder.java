@@ -1,6 +1,8 @@
 package org.example.Components;
 
+import org.example.Exceptions.InvalidInstructionFormatException;
 import org.example.Instructions.Instruction;
+import org.example.Utils.OpUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,8 +14,11 @@ public class Decoder {
         return OPParams;
     }
 
-    public Instruction decode(String instruction) {//16 bits
-        String op = instruction.substring(0, 6);//op 6 bits
+    public Instruction decode(String instruction) throws InvalidInstructionFormatException {//16 bits
+        String op = OpUtils.matchOP(instruction.substring(0, 6));//op 6 bits
+        if(op == null){
+            throw new InvalidInstructionFormatException("Invalid op!");
+        }
         String src1 = instruction.substring(6, 12);//src1 5 bits
         String src2 = instruction.substring(12);//src2 5 bits
         if (OPParams.contains(src1) || OPParams.contains(src2)) {
